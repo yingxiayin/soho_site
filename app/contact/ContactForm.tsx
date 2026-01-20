@@ -247,26 +247,25 @@ export default function ContactForm() {
                     <p className="text-sm text-gray-600 mb-4">
                       Download our complete product catalog with detailed specifications, product images.
                     </p>
-                    <button
-                      onClick={handleDownloadCatalog}
-                      className="w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition flex items-center justify-center"
-                    >
-                      <FiDownload className="mr-2" />
-                      Download Product Catalog & Quote (PDF)
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <button
+                        onClick={handleDownloadCatalog}
+                        className="flex-1 bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition flex items-center justify-center"
+                      >
+                        <FiDownload className="mr-2" />
+                        Download Product Catalog & Quote (PDF)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleNewInquiry}
+                        className="flex-1 bg-white text-primary-700 px-6 py-3 rounded-lg font-semibold border border-primary-300 hover:bg-primary-50 transition flex items-center justify-center"
+                      >
+                        Send Another Inquiry
+                      </button>
+                    </div>
                     <p className="text-xs text-gray-500 mt-3 text-center">
                       File size: ~10MB | Format: PDF | Includes product catalog and product models
                     </p>
-                  </div>
-
-                  <div className="mt-6 flex justify-center">
-                    <button
-                      type="button"
-                      onClick={handleNewInquiry}
-                      className="inline-flex items-center px-4 py-2 rounded-lg border border-primary-300 text-primary-700 text-sm font-medium hover:bg-primary-50 transition"
-                    >
-                      Send Another Inquiry
-                    </button>
                   </div>
                 </div>
               ) : (
