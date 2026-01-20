@@ -4,20 +4,24 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { FiMail, FiMessageCircle, FiMapPin, FiSend, FiCheckCircle, FiDownload, FiFacebook, FiInstagram } from 'react-icons/fi'
 
+const initialFormState = {
+  name: '',
+  email: '',
+  phone: '',
+  whatsapp: '',
+  subject: 'wholesale-quote',
+  message: '',
+}
+
 export default function ContactForm() {
   const searchParams = useSearchParams()
   const productId = searchParams.get('product')
   const productName = searchParams.get('productName')
   
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    whatsapp: '',
-    subject: '',
-    message: '',
-  })
+  const [formData, setFormData] = useState(initialFormState)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   // Check if user has already submitted a quote
   useEffect(() => {
@@ -36,14 +40,46 @@ export default function ContactForm() {
     }
   }, [productId, productName])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData)
-    
-    // Save submission status to localStorage
-    localStorage.setItem('quoteSubmitted', 'true')
-    setIsSubmitted(true)
+    setIsSubmitting(true)
+    setError(null)
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      // Success - save submission status
+      localStorage.setItem('quoteSubmitted', 'true')
+      setIsSubmitted(true)
+    } catch (err: any) {
+      console.error('Contact form error:', err)
+      setError(err.message || 'Failed to send your message. Please try again later or contact us directly.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleNewInquiry = () => {
+    // Allow user to submit another inquiry
+    localStorage.removeItem('quoteSubmitted')
+    setIsSubmitted(false)
+
+    // Reset form while keeping any product pre-fill context for subject/message if user navigated from a product
+    setFormData((prev) => ({
+      ...initialFormState,
+      subject: prev.subject,
+      message: prev.message,
+    }))
   }
 
   const handleDownloadCatalog = () => {
@@ -209,7 +245,7 @@ export default function ContactForm() {
                       Download Product Catalog & Quote Information
                     </h4>
                     <p className="text-sm text-gray-600 mb-4">
-                      Download our complete product catalog with detailed specifications, pricing information, product images, and quote details.
+                      Download our complete product catalog with detailed specifications, product images.
                     </p>
                     <button
                       onClick={handleDownloadCatalog}
@@ -219,8 +255,18 @@ export default function ContactForm() {
                       Download Product Catalog & Quote (PDF)
                     </button>
                     <p className="text-xs text-gray-500 mt-3 text-center">
-                      File size: ~10MB | Format: PDF | Includes product catalog and quote information
+                      File size: ~10MB | Format: PDF | Includes product catalog and product models
                     </p>
+                  </div>
+
+                  <div className="mt-6 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={handleNewInquiry}
+                      className="inline-flex items-center px-4 py-2 rounded-lg border border-primary-300 text-primary-700 text-sm font-medium hover:bg-primary-50 transition"
+                    >
+                      Send Another Inquiry
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -326,11 +372,19 @@ export default function ContactForm() {
 
                   <button
                     type="submit"
-                    className="w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition flex items-center justify-center"
+                    disabled={isSubmitting}
+                    className="w-full bg-primary-600 disabled:opacity-60 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition flex items-center justify-center"
                   >
                     <FiSend className="mr-2" />
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
+                  {error && (
+                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-sm text-red-700 text-center">
+                        {error}
+                      </p>
+                    </div>
+                  )}
                 </form>
               )}
             </div>
