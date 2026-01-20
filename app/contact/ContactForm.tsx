@@ -129,10 +129,10 @@ export default function ContactForm() {
                   <div className="ml-4">
                     <h3 className="text-sm font-medium text-gray-500">Email</h3>
                     <a
-                      href="mailto:info@hailifechairs.com"
+                      href="mailto:hello@hailifechairs.com"
                       className="text-gray-900 hover:text-primary-600 transition"
                     >
-                      info@hailifechairs.com
+                      hello@hailifechairs.com
                     </a>
                   </div>
                 </div>

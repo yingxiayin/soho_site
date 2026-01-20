@@ -60,8 +60,8 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center text-primary-300">
                 <FiMail className="mr-2" />
-                <a href="mailto:info@hailifechairs.com" className="hover:text-primary-50 transition">
-                  info@hailifechairs.com
+                <a href="mailto:hello@hailifechairs.com" className="hover:text-primary-50 transition">
+                  hello@hailifechairs.com
                 </a>
               </li>
               <li className="flex items-center text-primary-300">
