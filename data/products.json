@@ -1,0 +1,114 @@
+{
+  "1": {
+    "id": 1,
+    "name": "Cotton Padded Chair Series",
+    "description": "Outdoor leisure chairs with cotton padded material, available in multiple designs",
+    "fullDescription": "The Cotton Padded Chair Series is designed for outdoor leisure scenarios. Made of comfortable cotton padded material, it includes various styles such as dirt-resistant, reinforced, five-speed adjustable, luxury oak, and gathered types to meet different usage needs, suitable for outdoor environments like campsites",
+    "image": [
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho160_00.jpg",
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho160_01.jpg",
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho160_02.jpg"
+    ],
+    "category": "Chairs",
+    "features": [
+      "Nature-friendly material",
+      "Multiple style options",
+      "Some with adjustable functions",
+      "Reinforced and dirt-resistant design",
+      "Outdoor-specific"
+    ],
+    "specifications": [
+      { "label": "Product Model", "value": "CHO-160" },
+      { "label": "Product Dimensions (cm)", "value": "60x54x75" },
+      { "label": "Carton Dimensions (cm)", "value": "Determined according to different models" },
+      { "label": "Material", "value": "Carbon Steel" },
+      { "label": "Features", "value": "Dirt-resistant, Reinforced type, Five-speed adjustable, Luxury type, Gathered type" }
+    ],
+    "moq": "50",
+    "packaging": "Standard carton packaging",
+    "isFeatured": true
+  },
+  "2": {
+    "id": 2,
+    "name": "Space Chair Series",
+    "description": "Outdoor leisure space chairs, multiple options available",
+    "fullDescription": "The Space Chair Series is a professional outdoor leisure product made of Nature-friendly materials. Designed to be portable and elegant, it provides a comfortable seating experience for outdoor scenarios, with multiple models to meet diverse needs",
+    "image": [
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho150_00.jpg",
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho150_01.jpg",
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho150_02.jpg"
+    ],
+    "category": "Chairs",
+    "features": [
+      "Nature-friendly material",
+      "Professional outdoor design",
+      "Portable and elegant",
+      "Multiple options available"
+    ],
+    "specifications": [
+      { "label": "Product Model", "value": "CHO-150" },
+      { "label": "Product Dimensions (cm)", "value": "43x40x83" },
+      { "label": "Carton Dimensions (cm)", "value": "Determined according to different models" },
+      { "label": "Material", "value": "Carbon Steel" },
+      { "label": "Features", "value": "Camping & Outdoor Use, Moon Chair Design, Space-Saving Storage, Suitable for Fishing & Beach" }
+    ],
+    "moq": "10",
+    "packaging": "Standard carton packaging",
+    "isFeatured": true
+  },
+  "3": {
+    "id": 3,
+    "name": "Beach Chair Series",
+    "description": "Dual-purpose outdoor recliners with double square tube that can be used as chairs and beds",
+    "fullDescription": "The Dual-purpose Recliner Series (Double Square Tube) is made of Nature-friendly materials, supporting 180° full recline to convert from a recliner to a bed. It includes basic models, upgraded versions, double-layer cotton padded models, mat spliced models, etc. The extra-wide design is more comfortable, suitable for outdoor leisure and rest scenarios",
+    "image": [
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho103_00.jpg",
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho103_01.jpg",
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho103_02.jpg",
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho103_03.jpg",
+      "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho103_04.jpg"],
+    "category": "Chairs",
+    "features": [
+      "Nature-friendly material",
+      "180° full recline",
+      "Converts from recliner to bed",
+      "Double square tube structure",
+      "Multiple style options"
+    ],
+    "specifications": [
+      { "label": "Product Model", "value": "CHO-103" },
+      { "label": "Product Dimensions (cm)", "value": "178*60*79" },
+      { "label": "Carton Dimensions (cm)", "value": "Determined according to different models" },
+      { "label": "Material Features", "value": "Double-layer cotton padding, Mat spliced, Extra-wide double square tube" }
+    ],
+    "moq": "10",
+    "packaging": "Standard carton packaging",
+    "isFeatured": true
+  },
+  "4": {
+    "id": 4,
+    "name": "Hanging Chair Series",
+    "description": "Outdoor leisure hanging chairs for comfort and relaxation",
+    "fullDescription": "The Hanging Chair Series is made of Nature-friendly materials, designed for outdoor leisure and relaxation. The suspended structure provides a unique seating experience, including multiple models, suitable for outdoor spaces such as courtyards and campsites",
+    "image": [
+        "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho132_00.jpg",
+        "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho132_01.jpg",
+        "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho132_02.jpg",
+        "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/product_img/cho132_03.jpg"],
+    "category": "Chairs",
+    "features": [
+      "Nature-friendly material",
+      "Suspended structure",
+      "Comfortable and relaxing",
+      "Outdoor-specific"
+    ],
+    "specifications": [
+      { "label": "Product Model", "value": "CHO-132" },
+      { "label": "Partial Carton Dimensions (cm)", "value": "68x22x45/2pcs, 30X45/10pcs, 22x35.5x33cm" },
+      { "label": "Carton Dimensions (cm)", "value": "Determined according to different models" }
+    ],
+    "moq": "50",
+    "packaging": "Standard carton packaging",
+    "isFeatured": true
+  }
+}

@@ -1,0 +1,36 @@
+{
+    "1": {
+        "id": 1,
+        "title": "About SellAny: Connecting China’s Supply Chain to Global Markets",
+        "excerpt": "Learn how SellAny, rooted in Hong Kong, bridges China’s high-quality supply chains with global markets to deliver end-to-end multi-category trade solutions.",
+        "slug": "about-sellany-connecting-chinas-supply-chain-to-global-markets",
+        "heroImage":  "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/blog_img/01_00_sellany.jpg",
+        "date": "2024-01-15",
+        "category": "Company Introduction",
+        "author": "HaiLife Team",
+        "contentPath": "blog-posts/1.md"
+    },
+    "2": {
+        "id": 2,
+        "title": "Our Product Range: Premium Outdoor Gear for Every Adventure",
+        "excerpt": "Explore SellAny’s HaiLife project’s full line of premium outdoor gear, from folding chairs to camping carts, designed for comfort, portability and customization.",
+        "slug": "our-product-range-premium-outdoor-gear-for-every-adventure",
+        "heroImage": "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/blog_img/02_00_chairs.jpg",
+        "date": "2024-02-10",
+        "category": "Product",
+        "author": "HaiLife Team",
+        "contentPath": "blog-posts/2.md"
+    },
+    "3": {
+        "id": 3,
+        "title": "Our Team: Your Trusted Partner in Global Foreign Trade",
+        "excerpt": "Meet the experienced SellAny team dedicated to supply chain integration, customer-centric service and supporting your global trade growth journey.",
+        "slug": "our-team-your-trusted-partner-in-global-foreign-trade",
+        "heroImage": "https://pub-3b2acdbe1fa34455859f328488a06e3e.r2.dev/blog_img/03_00_ourteam.jpg",
+        "date": "2024-02-15",
+        "category": "Team & Values",
+        "author": "HaiLife Team",
+        "contentPath": "blog-posts/3.md"
+    }
+}
+
