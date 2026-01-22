@@ -152,7 +152,7 @@ export default function Home() {
                 key={product.id}
                 className="bg-white rounded-lg border border-primary-200 overflow-hidden hover:border-primary-300 transition group flex flex-col"
               >
-                <Link href={`/products/${product.id}`} className="flex-1 flex flex-col">
+                <Link href={`/products/${product.slug}`} className="flex-1 flex flex-col">
                   <div className="aspect-w-16 aspect-h-9 bg-gray-200 relative overflow-hidden">
                     {product.image ? (
                       <img

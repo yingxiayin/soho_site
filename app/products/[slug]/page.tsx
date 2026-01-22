@@ -1,13 +1,24 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { getProductById } from '@/data/products'
+import { notFound, redirect } from 'next/navigation'
+import { getProductById, getProductBySlug } from '@/data/products'
 import ProductDetailClient from './ProductDetailClient'
 
 const baseUrl = 'https://www.hailifechairs.com'
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const productId = parseInt(params.id)
-  const product = !isNaN(productId) ? getProductById(productId) : null
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  // Legacy support: old URLs were /products/{id}. If slug is numeric, redirect to the canonical slug URL.
+  if (/^\d+$/.test(params.slug)) {
+    const id = parseInt(params.slug, 10)
+    const legacyProduct = getProductById(id)
+    if (!legacyProduct) {
+      return {
+        title: 'Product Not Found',
+      }
+    }
+    // Will redirect in component
+  }
+
+  const product = getProductBySlug(params.slug)
 
   if (!product) {
     return {
@@ -34,7 +45,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       type: 'website',
       title: `${product.name} | HaiLife Chairs`,
       description,
-      url: `${baseUrl}/products/${product.id}`,
+      url: `${baseUrl}/products/${product.slug}`,
       images: [
         {
           url: productImage,
@@ -45,14 +56,21 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       ],
     },
     alternates: {
-      canonical: `${baseUrl}/products/${product.id}`,
+      canonical: `${baseUrl}/products/${product.slug}`,
     },
   }
 }
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  const productId = parseInt(params.id)
-  const product = !isNaN(productId) ? getProductById(productId) : null
+export default function ProductDetailPage({ params }: { params: { slug: string } }) {
+  // Legacy support: old URLs were /products/{id}. If slug is numeric, redirect to the canonical slug URL.
+  if (/^\d+$/.test(params.slug)) {
+    const id = parseInt(params.slug, 10)
+    const legacyProduct = getProductById(id)
+    if (!legacyProduct) notFound()
+    redirect(`/products/${legacyProduct.slug}`)
+  }
+
+  const product = getProductBySlug(params.slug)
 
   if (!product) {
     notFound()
@@ -85,7 +103,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 '@type': 'Organization',
                 name: 'HaiLife',
               },
-              url: `${baseUrl}/products/${product.id}`,
+              url: `${baseUrl}/products/${product.slug}`,
             },
             aggregateRating: {
               '@type': 'AggregateRating',
