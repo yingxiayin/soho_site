@@ -26,17 +26,22 @@ export default function ContactForm() {
   // Check if user has already submitted a quote
   useEffect(() => {
     const hasSubmitted = localStorage.getItem('quoteSubmitted') === 'true'
-    if (hasSubmitted) {
-      setIsSubmitted(true)
-    }
     
-    // Pre-fill form if product is specified
+    // If URL has product parameter, allow submitting again (even if already submitted)
+    // This enables users to request quotes for different products
     if (productId && productName) {
+      // Reset submitted state to show form when coming from product card
+      setIsSubmitted(false)
+      
+      // Pre-fill form with product information
       setFormData(prev => ({
         ...prev,
         subject: 'wholesale-quote',
         message: `I'm interested in getting a quote for: ${decodeURIComponent(productName)} (Product ID: ${productId})\n\nPlease provide wholesale pricing and MOQ information.`,
       }))
+    } else if (hasSubmitted) {
+      // Only show success message if no product parameter and already submitted
+      setIsSubmitted(true)
     }
   }, [productId, productName])
 

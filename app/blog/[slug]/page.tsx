@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FiArrowLeft, FiCalendar, FiUser } from 'react-icons/fi'
 import { notFound, redirect } from 'next/navigation'
@@ -9,6 +10,60 @@ import remarkRehype from 'remark-rehype'
 import rehypeSanitize from 'rehype-sanitize'
 import rehypeStringify from 'rehype-stringify'
 import { defaultSchema } from 'hast-util-sanitize'
+
+const baseUrl = 'https://www.hailifechairs.com'
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  // Legacy support: old URLs were /blog/{id}. If slug is numeric, redirect to the canonical slug URL.
+  if (/^\d+$/.test(params.slug)) {
+    const id = parseInt(params.slug, 10)
+    const legacyPost = getBlogPostById(id)
+    if (!legacyPost) {
+      return {
+        title: 'Blog Post Not Found',
+      }
+    }
+    // Will redirect in component
+  }
+
+  const post = getBlogPostBySlug(params.slug)
+
+  if (!post) {
+    return {
+      title: 'Blog Post Not Found',
+    }
+  }
+
+  const description = post.excerpt || `Read about ${post.title} on HaiLife Chairs blog.`
+  const image = post.heroImage || `${baseUrl}/og-image.jpg`
+
+  return {
+    title: post.title,
+    description,
+    keywords: [post.category, 'outdoor furniture', 'outdoor chairs', 'furniture tips', 'design ideas'],
+    authors: [{ name: post.author }],
+    openGraph: {
+      type: 'article',
+      title: post.title,
+      description,
+      url: `${baseUrl}/blog/${post.slug}`,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      publishedTime: post.date,
+      authors: [post.author],
+      section: post.category,
+    },
+    alternates: {
+      canonical: `${baseUrl}/blog/${post.slug}`,
+    },
+  }
+}
 
 function asPlugin<T>(mod: T): any {
   return (mod as any)?.default ?? mod
@@ -82,9 +137,43 @@ export default async function BlogPostBySlugPage({ params }: { params: { slug: s
   }
 
   const html = await renderPostContentToHtml(post.content)
+  const image = post.heroImage || `${baseUrl}/og-image.jpg`
 
   return (
-    <div className="bg-primary-50 min-h-screen">
+    <>
+      {/* Structured Data - Article */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.title,
+            description: post.excerpt,
+            image: image,
+            datePublished: post.date,
+            dateModified: post.date,
+            author: {
+              '@type': 'Person',
+              name: post.author,
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'HaiLife',
+              logo: {
+                '@type': 'ImageObject',
+                url: `${baseUrl}/logo.png`,
+              },
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': `${baseUrl}/blog/${post.slug}`,
+            },
+            articleSection: post.category,
+          }),
+        }}
+      />
+      <div className="bg-primary-50 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link href="/blog" className="inline-flex items-center text-primary-600 hover:text-primary-700 mb-6">
           <FiArrowLeft className="mr-2" />
@@ -134,7 +223,8 @@ export default async function BlogPostBySlugPage({ params }: { params: { slug: s
           </div>
         </article>
       </div>
-    </div>
+      </div>
+    </>
   )
 }
 

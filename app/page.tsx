@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Script from 'next/script'
 import { FiDollarSign, FiSettings, FiTruck, FiAward, FiArrowRight, FiFileText } from 'react-icons/fi'
 import HeroCarousel from '@/components/HeroCarousel'
 import { getFeaturedProducts } from '@/data/products'
@@ -38,13 +39,49 @@ const features = [
 
 export default function Home() {
   const featuredProducts = getFeaturedProducts()
+  const baseUrl = 'https://www.hailifechairs.com'
+  
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'HaiLife',
+    url: baseUrl,
+    logo: `${baseUrl}/logo.png`,
+    description: 'B2B supplier of premium outdoor chairs. Wholesale pricing, OEM services, private label, and custom manufacturing solutions for businesses worldwide.',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+852-94717295',
+      contactType: 'Sales',
+      email: 'hello@hailifechairs.com',
+      areaServed: 'Worldwide',
+      availableLanguage: ['English', 'Chinese'],
+    },
+    sameAs: [
+      'https://www.facebook.com/hailifechairs/',
+      'https://www.instagram.com/hailife',
+    ],
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'HK',
+    },
+  }
+  
   return (
-    <div>
-      {/* Hero Carousel Section */}
-      <HeroCarousel />
+    <>
+      {/* Structured Data - Organization */}
+      <Script
+        id="organization-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+      <div>
+        {/* Hero Carousel Section */}
+        <HeroCarousel />
 
-      {/* Features Section */}
-      <section className="py-16 bg-primary-50">
+        {/* Features Section */}
+        <section className="py-16 bg-primary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -200,6 +237,7 @@ export default function Home() {
           </p>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }
